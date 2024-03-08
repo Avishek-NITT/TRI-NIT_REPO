@@ -1,10 +1,18 @@
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
+
+
+
 function Home(){
     return (
         <>
-            Hello here
+            <Navbar></Navbar>
+
+
+            Body of the page
+
+
             
         </>
     );
