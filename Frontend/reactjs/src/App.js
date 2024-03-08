@@ -1,11 +1,17 @@
-
 import './App.css';
+import Home from './components/screens/Home'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className='fs-1'>
-      Return me
-    </div>
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />}>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    </>
   );
 }
 
