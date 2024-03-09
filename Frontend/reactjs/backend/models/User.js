@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-const { Shema } =mongoose
+const { Schema } = mongoose
 
 const Userschema = new Schema({
     name:{
         type:String,
         required:true,
     },
-    location:{
+    role:{ //String shd be all in lowercase
         type:String,
         required:true,
     },
@@ -21,7 +21,7 @@ const Userschema = new Schema({
     },
     date:{
         type:Date,
-        default:date.now()
+        default:Date.now()
     }
 })
 
