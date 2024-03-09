@@ -2,11 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
 const { body, validationResult } = require('express-validator');
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const jwtSecret = "SAXSUX"
-
-
 
 router.post('/createUser', 
 [body('email').isEmail(),
@@ -19,14 +14,10 @@ async(req,res)=>{
         return res.status(400).json({errors : errors.array()});
     }
     
-    const salt = await bcrypt.genSalt(10);
-    let secPassword = await bcrypt.hash(req.body.password, salt);
-
-
     try{
         await User.create({
             name:req.body.name,
-            password:secPassword,
+            password:req.body.password,
             email:req.body.email,
             role:req.body.role, //student or teacher lets keep it all in small letters
         })
@@ -39,26 +30,15 @@ async(req,res)=>{
 
 router.post('/loginUser' , async(req , res)=>{
     let email = req.body.email ;
-    
     try{
         let userdata = await User.findOne({email}) ;
         if(!userdata) res.status(400).json({errors: "Not a valid email Id"}) ;
 
-        const pwdCompare = await bcrypt.compare(req.body.password, userdata.password);
-        
-        if(!pwdCompare){
+        if(req.body.password !== userdata.password){
             return res.status(400).json({errors: "Not a valid password"}) ;
-        } 
-
-        const data = {
-            user:{
-                id: userdata.id
-            }
+        } else{
+            res.send({success : 1});
         }
-        //JWT stuff
-        const authToken = jwt.sign(data,jwtSecret)
-        console.log(authToken); 
-        res.send({success : 1, authToken : authToken});
     } catch(err){
         res.send({success : 0});
         console.log(err) ;

@@ -13,9 +13,11 @@ app.use((req,res,next)=>{
     );
     next();
 })
-// console.log("Hello")
+
 app.use(express.json());
 app.use("/api", require('./Routes/CreateUser'))
+app.use("/fill", require('./Routes/Userinfo'))
+app.use("/match", require('./Routes/Matching'))
 
 app.listen(port , (error)=>{
     if(error){
