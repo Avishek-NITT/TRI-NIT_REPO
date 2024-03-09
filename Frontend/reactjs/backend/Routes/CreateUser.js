@@ -19,7 +19,7 @@ async(req,res)=>{
             name:req.body.name,
             password:req.body.password,
             email:req.body.email,
-            location:req.body.location,
+            role:req.body.role, //student or teacher lets keep it all in small letters
         })
         res.send({success : 1});
     } catch(err){
