@@ -1,7 +1,6 @@
 import Navbar from "../Navbar";
 import React,{ useState } from "react";
-
-
+import { Navigate } from "react-router-dom";
 
 
 const Login = () => {
@@ -22,6 +21,7 @@ const Login = () => {
         console.log(requestBody);
 
         try {
+            
             const response = await fetch('http://localhost:4000/api/loginUser', {
                 method: 'POST',
                 headers: {
@@ -29,19 +29,28 @@ const Login = () => {
                 },
                 body: JSON.stringify(requestBody)
             });
-
+            
             if (!response.ok) {
                 // Handle error response from the server
                 const errorMessage = await response.text();
                 throw new Error(errorMessage);
             }
+            
 
-            // Clear form fields on successful sign-up
+            // Clear form fields on successful login
             setEmail('');
             setPassword('');
 
-            // Handle successful response from the server
+            // Save auth token in local storage
             console.log('Login successful');
+            const json = await response.json();
+            
+            localStorage.setItem("authToken", json.authToken);
+            console.log(localStorage.getItem("authToken"));
+            // return<Navigate to="/" replace={true} />;
+
+            //!!!!!!!!!!!!!!!!!Navigate back to home page
+
         } catch (error) {
             // Handle network errors or server-side errors
             setError(error.message);
