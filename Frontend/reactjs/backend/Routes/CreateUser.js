@@ -30,6 +30,7 @@ async(req,res)=>{
 
 router.post('/loginUser' , async(req , res)=>{
     let email = req.body.email ;
+    
     try{
         let userdata = await User.findOne({email}) ;
         if(!userdata) res.status(400).json({errors: "Not a valid email Id"}) ;
@@ -37,6 +38,7 @@ router.post('/loginUser' , async(req , res)=>{
         if(req.body.password !== userdata.password){
             return res.status(400).json({errors: "Not a valid password"}) ;
         } else{
+            
             res.send({success : 1});
         }
     } catch(err){

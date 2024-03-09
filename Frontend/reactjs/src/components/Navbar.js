@@ -30,6 +30,9 @@ const Navbar = ({ isLoggedIn }) => {
                           <li className='nav-item>'>
                             <Link className='nav-link' to="/signup">Sign In</Link>
                           </li>
+                          <li className='nav-item>'>
+                            <Link className='nav-link' to="/login">Login</Link>
+                          </li>
                         </ul> 
                   </div> 
                 )}

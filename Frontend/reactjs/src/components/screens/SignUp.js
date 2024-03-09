@@ -52,11 +52,12 @@ const SignUp = () => {
     };
 
     return (
-        <div>
+        <>
             <Navbar isLoggedIn={isLoggedIn}></Navbar>
+        <div>
             This is the signin page
             <h2>Sign In</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Email address</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email"/>
@@ -106,9 +107,10 @@ const SignUp = () => {
                     </div>
 
 
-                <button type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </div>
+        </>
     );
 }
 
