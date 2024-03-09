@@ -22,33 +22,33 @@ const SignUp = () => {
 
         console.log(requestBody);
 
-        // try {
-        //     const response = await fetch('https://localhost:4000//createuser', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(requestBody)
-        //     });
+        try {
+            const response = await fetch('http://localhost:4000/api/createUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
 
-        //     if (!response.ok) {
-        //         // Handle error response from the server
-        //         const errorMessage = await response.text();
-        //         throw new Error(errorMessage);
-        //     }
+            if (!response.ok) {
+                // Handle error response from the server
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);
+            }
 
-        //     // Clear form fields on successful sign-up
-        //     setEmail('');
-        //     setPassword('');
-        //     setName('');
-        //     // setRole('');
+            // Clear form fields on successful sign-up
+            setEmail('');
+            setPassword('');
+            setName('');
+            setRole('');
             
-        //     // Handle successful response from the server
-        //     console.log('Sign-up successful');
-        // } catch (error) {
-        //     // Handle network errors or server-side errors
-        //     setError(error.message);
-        // }
+            // Handle successful response from the server
+            console.log('Sign-up successful');
+        } catch (error) {
+            // Handle network errors or server-side errors
+            setError(error.message);
+        }
     };
 
     return (

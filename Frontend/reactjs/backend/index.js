@@ -13,7 +13,7 @@ app.use((req,res,next)=>{
     );
     next();
 })
-
+// console.log("Hello")
 app.use(express.json());
 app.use("/api", require('./Routes/CreateUser'))
 
