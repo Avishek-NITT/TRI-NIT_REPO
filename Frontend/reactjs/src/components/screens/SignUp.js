@@ -1,13 +1,16 @@
-import Navbar from "../Navbar";
+import { useNavigate } from 'react-router-dom';
+import SignUpNavbar from '../SignUpNavbar';
 import React,{ useState } from "react";
 
+
 const SignUp = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false); //Signifies that the user is not logged in , so displays the contents of the page accordingly
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [role, setRole] = useState(''); // 'teacher' or 'student'
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -45,6 +48,8 @@ const SignUp = () => {
             
             // Handle successful response from the server
             console.log('Sign-up successful');
+            
+            navigate('/login');
         } catch (error) {
             // Handle network errors or server-side errors
             setError(error.message);
@@ -53,7 +58,7 @@ const SignUp = () => {
 
     return (
         <>
-            <Navbar isLoggedIn={isLoggedIn}></Navbar>
+            <SignUpNavbar/>
             This is the signin page
         <div className="d-flex flex-column align-items-center w-100">
             <h2>SIGN IN</h2>

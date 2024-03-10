@@ -6,12 +6,14 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const jwtSecret = "SAXSUX"
 
+//Contains route for SIGNUP and LOGIN for user
 
 
+//SIGNUP
 router.post('/createUser', 
 [body('email').isEmail(),
 body('name').isLength({min : 4}),
-body('password' , 'Incorrect password').isLength({min : 5})],
+body('password' , 'Incorrect password').isLength({min : 5})], // check whether teacher or student role is selected or not
 async(req,res)=>{
 
     const errors = validationResult(req);
@@ -37,6 +39,8 @@ async(req,res)=>{
     }
 })
 
+
+//LOGIN
 router.post('/loginUser' , async(req , res)=>{
     let email = req.body.email ;
     
