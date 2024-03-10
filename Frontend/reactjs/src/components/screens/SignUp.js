@@ -52,32 +52,34 @@ const SignUp = () => {
     };
 
     return (
-        <div>
+        <>
             <Navbar isLoggedIn={isLoggedIn}></Navbar>
             This is the signin page
-            <h2>Sign In</h2>
-            <form>
-                <div className="form-group">
-                    <label>Email address</label>
+        <div className="d-flex flex-column align-items-center w-100">
+            <h2>SIGN IN</h2>
+            <div className="d-flex flex-column align-items-center border border-primary border-opacity-25 rounded d-flex p-3 w-50">
+            <form onSubmit={handleSubmit}>
+                <div className="form-group m-3">
+                    <label className="font-monospace">EMAIL:</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email"/>
                     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
 
-                <div className="form-group">
-                    <label >Name</label>
+                <div className="form-group m-3">
+                    <label className="font-monospace">NAME:</label>
                     <input type="text" className="form-control" id="exampleInputName" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your name" required/>
                 </div>
-                <div className="form-group">
-                    <label >Password</label>
+                <div className="form-group m-3">
+                    <label className="font-monospace">PASSWORD:</label>
                     <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password"/>
                 </div>
 
 
 
-                <div className="form-group">
-                    <label>Role:</label>
-                    <div>
-                        <div className="form-check">
+                <div className="form-group m-3">
+                    <label className="font-monospace">Role:</label>
+                    <div className="d-flex flex-row">
+                        <div className="form-check m-3">
                             <input
                                 type="radio"
                                 id="teacher"
@@ -89,7 +91,7 @@ const SignUp = () => {
                             />
                             <label className="form-check-label" htmlFor="teacher">Teacher</label>
                         </div>
-                        <div className="form-check">
+                        <div className="form-check m-3">
                             <input
                                 type="radio"
                                 id="student"
@@ -106,8 +108,11 @@ const SignUp = () => {
                     </div>
 
 
-                <button type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
+
+                <button type="submit" className="btn btn-primary m-3">Submit</button>
+
             </form>
+            </div>
         </div>
     );
 }
