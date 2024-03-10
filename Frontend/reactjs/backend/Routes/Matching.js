@@ -14,7 +14,7 @@ router.post('/studMatch' , async(req , res)=>{
         const d1 = studentdata.learning ;
         console.log(d1);
         const prim = await Info.find({
-            fluency: {$elemMatch: {d1}}
+            fluency: {$elemMatch: {language:d1}}
         });
         console.log(prim) ;
 
@@ -22,7 +22,7 @@ router.post('/studMatch' , async(req , res)=>{
         const sec = await Info.find({
             fluency: {$elemMatch: {language:flu}}
         })
-        console.log(res);
+        console.log(sec);
         res.send(sec) ;
 
     } catch(err){
