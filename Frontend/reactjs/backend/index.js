@@ -16,6 +16,8 @@ app.use((req,res,next)=>{
 // console.log("Hello")
 app.use(express.json());
 app.use("/api", require('./Routes/CreateUser'))
+app.use("/fill", require('./Routes/Userinfo'))
+app.use("/match", require('./Routes/Matching'))
 
 app.listen(port , (error)=>{
     if(error){
@@ -24,3 +26,6 @@ app.listen(port , (error)=>{
         console.log("Server active on port : "+port);
     }
 }) ;
+
+
+///////////////////////////////////////////////////////////
