@@ -13,29 +13,9 @@ const Navbar = ({ isLoggedIn }) => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/courses">Courses</Link>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Pricing</a>
-                        </li>
                     </ul>
                 </div>
                 
-                {/* Check whether user is logged in or not */}
-                {isLoggedIn ? (
-                    <div>
-                        This means user is logged in.        
-                    </div>
-                ) : (
-                  <div className="collapse navbar-collapse" id="navbarNav">
-                       <ul className='navbar-nav'>
-                          <li className='nav-item>'>
-                            <Link className='nav-link' to="/signup">Sign In</Link>
-                          </li>
-                          <li className='nav-item>'>
-                            <Link className='nav-link' to="/login">Login</Link>
-                          </li>
-                        </ul> 
-                  </div> 
-                )}
             </nav>
         </>
     );

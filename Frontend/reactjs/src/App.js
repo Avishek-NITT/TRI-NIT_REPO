@@ -1,5 +1,5 @@
 import './App.css';
-import CleanHome from './components/screens/CleanHome'
+import Home from './components/screens/Home'
 import Login from './components/screens/Login';
 import Courses from './components/screens/Courses';
 import SignUp from './components/screens/SignUp';
@@ -11,11 +11,11 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CleanHome />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path ="/login" element={<Login/>}></Route>
         <Route path="/courses" element={<Courses/>}></Route>
       <Route path="/signUp" element={<SignUp/>}></Route>
-      <Route path="/login" element={<Login/>}></Route>
+      
       </Routes>
     </BrowserRouter>
     </>

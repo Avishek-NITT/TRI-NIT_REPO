@@ -1,13 +1,14 @@
-import Navbar from "../Navbar";
+import SignUpNavbar from '../SignUpNavbar';
 import React,{ useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false); //Signifies that the user is not logged in , so displays the contents of the page accordingly
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,48 +21,63 @@ const Login = () => {
 
         console.log(requestBody);
 
-        try {
+
+        const authToken = localStorage.getItem("authToken");
+
+        if(authToken !== undefined){
+            console.log("Already logged in!!");
+        }else{
             
-            const response = await fetch('http://localhost:4000/api/loginUser', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            });
-            
-            if (!response.ok) {
-                // Handle error response from the server
-                const errorMessage = await response.text();
-                throw new Error(errorMessage);
+            try {
+                
+                const response = await fetch('http://localhost:4000/api/loginUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!response.ok) {
+                    // Handle error response from the server
+                    const errorMessage = await response.text();
+                    throw new Error(errorMessage);
+                }
+                
+    
+                // Clear form fields on successful login
+                setEmail('');
+                setPassword('');
+    
+                // Save auth token in local storage
+                console.log('Login successful');
+                const json = await response.json();
+                
+                localStorage.setItem("authToken", json.authToken);
+                console.log(localStorage.getItem("authToken"));
+                
+                
+                //!!!!!!!!!!!!!!!!!Navigate back to home page
+                
+            } catch (error) {
+                // Handle network errors or server-side errors
+                setError(error.message);
             }
-            
-
-            // Clear form fields on successful login
-            setEmail('');
-            setPassword('');
-
-            // Save auth token in local storage
-            console.log('Login successful');
-            const json = await response.json();
-            
-            localStorage.setItem("authToken", json.authToken);
-            console.log(localStorage.getItem("authToken"));
-            // return<Navigate to="/" replace={true} />;
-
-            //!!!!!!!!!!!!!!!!!Navigate back to home page
-
-        } catch (error) {
-            // Handle network errors or server-side errors
-            setError(error.message);
         }
+        //SET JWT logic here
+        navigate('/');
+
     };
 
-
+    if(localStorage.getItem("authToken") != undefined){
+        console.log("Already logged in!!");
+        
+    }
 
     return (
         <>
-            <Navbar isLoggedIn={isLoggedIn}></Navbar>
+        <SignUpNavbar/>
+
         <div>
             This is the Login page
             <h2>Log In</h2>
