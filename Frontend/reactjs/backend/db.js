@@ -9,9 +9,7 @@ const mongoDB = async () => {
         });
         console.log("Connected to MongoDB Atlas");
 
-        const collection = mongoose.connection.db.collection("sample");
-        const data = await collection.find({}).toArray();
-        console.log(data);
+        
     } catch (err) {
         console.error("Error:", err);
     }
