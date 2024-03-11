@@ -9,21 +9,28 @@ router.post('/studMatch' , async(req , res)=>{
     const email = req.body.email ;
     const flu = req.body.fluency;
     try{
-        const studentdata = await Stud.findOne({email}) ;
-        console.log(studentdata);
-        const d1 = studentdata.learning ;
-        console.log(d1);
+        const studentdata = await Stud.findOne({email}) ; //fetches studentdata from email which is supposed to be the primary key
+
+        const d1 = studentdata.learning ; //The language the the student is wanting to learn
+
+        //All the teachers that teach that particular language he wants to learn
         const prim = await Info.find({
             fluency: {$elemMatch: {language:d1}}
         });
-        console.log(prim) ;
 
+        //It gives all the teachers among the above that are fluent in the same language as him
+        let jsonarr = [];
+        for(let i = 0 ; i < prim.length ; i++){
+            const arr = prim[i].fluency ;
+            for(let j = 0 ; j < arr.length ; j++){
+                if(arr[j].language === flu){
+                    jsonarr.push(prim[i]);
+                    break ;
+                }
+            }
+        }
         
-        const sec = await Info.find({
-            fluency: {$elemMatch: {language:flu}}
-        })
-        console.log(sec);
-        res.send(sec) ;
+        res.send(jsonarr) ;
 
     } catch(err){
         console.log(err);
